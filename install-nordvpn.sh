@@ -19,7 +19,7 @@ Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
 
-Version 1.1.1
+Version 1.1.2
 EOF
   exit
 }
@@ -118,7 +118,7 @@ msg "===========================================================================
 
 INSTALLER="/tmp/$INSTALL-1_SBo.tgz"
 
-if test -f "$INSTALLER"; then
+if [[ -f "$INSTALLER" ]]; then
     installpkg "../$INSTALL-1_SBo.tgz"
 else
     msg "Oh no! I can not find the installer in /tmp/"
