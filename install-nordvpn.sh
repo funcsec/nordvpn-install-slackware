@@ -116,18 +116,23 @@ msg "===========================================================================
 msg "Installing package"
 msg "================================================================================"
 
-INSTALLER="/tmp/$INSTALL-1_SBo.tgz"
+INSTALLALT=`echo "$INSTALL" | awk -F "-" '{print $1"-"$2"-"substr($3, 3)$4}'`
 
-if [[ -f "$INSTALLER" ]]; then
-    installpkg "../$INSTALL-1_SBo.tgz"
+INSTALLER="/tmp/$INSTALL-1_SBo.tgz"
+INSTALLERALT="/tmp/$INSTALLALT-1_SBo.tgz"
+
+if [ -f "$INSTALLER" ]; then
+    installpkg "$INSTALLER"
+elif [ -f "$INSTALLERALT" ]; then
+    installpkg "$INSTALLERALT"
 else
     msg "Oh no! I can not find the installer in /tmp/"
     msg "It might be there but at a filename I can not predict"
     msg "Check for $INSTALL-????.tgz in /tmp/"
     msg "Run it with:"
     msg "installpkg FILEPATH"
-    mst "Change FILEPATH to the absolute path of the file you found"
-    die "Unable to find $INSTALLER"
+    msg "Change FILEPATH to the absolute path of the file you found"
+    die "Unable to find $INSTALLER or $INSTALLERALT"
 fi
 
 chmod +x /etc/rc.d/rc.nordvpn
