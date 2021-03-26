@@ -19,7 +19,7 @@ Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
 
-Version 1.1.0
+Version 1.1.1
 EOF
   exit
 }
@@ -87,8 +87,8 @@ msg "===========================================================================
 
 wget https://slackbuilds.org/slackbuilds/14.2/network/nordvpn.tar.gz          
 tar -xzf nordvpn.tar.gz                                                       
-
 cd nordvpn                                                                    
+
 msg "================================================================================"
 msg "Downloading Nord RPM"
 msg "================================================================================"
@@ -115,7 +115,9 @@ chmod +x ./nordvpn.SlackBuild
 msg "================================================================================"
 msg "Installing package"
 msg "================================================================================"
+
 INSTALLER="/tmp/$INSTALL-1_SBo.tgz"
+
 if test -f "$INSTALLER"; then
     installpkg "../$INSTALL-1_SBo.tgz"
 else
@@ -133,12 +135,15 @@ chmod +x /etc/rc.d/rc.nordvpn
 msg "================================================================================"
 msg "SUCCESS!!"
 msg "================================================================================"
+
 msg ""
 msg "Start NordVPN daemon with:"
 msg "/etc/rc.d/rc.nordvpn start"
+
 msg ""
 msg "Stop NordVPN daemon with:"
 msg "/etc/rc.d/rc.nordvpn stop"
+
 msg ""
 msg "Access nordvpn help with:"
 msg "nordvpn --help"
