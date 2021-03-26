@@ -78,32 +78,58 @@ setup_colors
 msg "================================================================================"
 msg "Changing directory to /tmp"
 msg "================================================================================"
+
 cd /tmp                                                                       
+
 msg "================================================================================"
 msg "Downloading Nordvpn build from SlackBuilds"
 msg "================================================================================"
+
 wget https://slackbuilds.org/slackbuilds/14.2/network/nordvpn.tar.gz          
 tar -xzf nordvpn.tar.gz                                                       
+
 cd nordvpn                                                                    
 msg "================================================================================"
 msg "Downloading Nord RPM"
 msg "================================================================================"
-awk -F "\"" '/DOWNLOAD_x86_64/ {print $2}' nordvpn.info | xargs -n1 wget
+
+SRC=`awk -F "\"" '/DOWNLOAD_x86_64/ {print $2}' nordvpn.info`
+FILENAME=`echo $SRC | awk -F "/" '{print $NF}'`
+INSTALL=`echo $FILENAME | sed 's/\.[^.]*$//'`
+echo "$SRC" | xargs -n1 wget
+
 msg "================================================================================"
 msg "Verifying MD5 sum"
 msg "================================================================================"
-echo `awk -F "\"" '/MD5SUM_x86_64/ {print $2}' nordvpn.info` nordvpn-3.8.6-1.x86_64.rpm | md5sum --check
+
+echo `awk -F "\"" '/MD5SUM_x86_64/ {print $2}' nordvpn.info` "$FILENAME" | md5sum --check
+
 msg "================================================================================"
 msg "Building package"
 msg "================================================================================"
+
 cd /tmp/nordvpn
 chmod +x ./nordvpn.SlackBuild                                                 
 ./nordvpn.SlackBuild                                                          
+
 msg "================================================================================"
 msg "Installing package"
 msg "================================================================================"
-installpkg ../nordvpn-3.8.6-x86_64-1_SBo.tgz 
+INSTALLER="/tmp/$INSTALL-1_SBo.tgz"
+if test -f "$INSTALLER"; then
+    installpkg "../$INSTALL-1_SBo.tgz"
+else
+    msg "Oh no! I can not find the installer in /tmp/"
+    msg "It might be there but at a filename I can not predict"
+    msg "Check for $INSTALL-????.tgz in /tmp/"
+    msg "Run it with:"
+    msg "installpkg FILEPATH"
+    mst "Change FILEPATH to the absolute path of the file you found"
+    die "Unable to find $INSTALLER"
+fi
+
 chmod +x /etc/rc.d/rc.nordvpn
+
 msg "================================================================================"
 msg "SUCCESS!!"
 msg "================================================================================"
