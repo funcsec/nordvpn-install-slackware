@@ -19,7 +19,7 @@ Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
 
-Version 1.0.0
+Version 1.1.0
 EOF
   exit
 }
