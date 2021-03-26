@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Excellent bash template
 # from https://betterdev.blog/minimal-safe-bash-script-template/
 
 set -Eeuo pipefail
