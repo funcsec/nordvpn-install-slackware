@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Excellent bash template
 # from https://betterdev.blog/minimal-safe-bash-script-template/
 
 set -Eeuo pipefail
@@ -17,6 +18,8 @@ Available options:
 
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
+
+Version 1.0.0
 EOF
   exit
 }
