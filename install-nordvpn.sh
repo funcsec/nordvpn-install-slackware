@@ -132,7 +132,7 @@ else
     msg "Run it with:"
     msg "installpkg FILEPATH"
     msg "Change FILEPATH to the absolute path of the file you found"
-    die "Unable to find $INSTALLER or $INSTALLERALT"
+    die "ERROR: Unable to find $INSTALLER or $INSTALLERALT"
 fi
 
 chmod +x /etc/rc.d/rc.nordvpn
