@@ -7,7 +7,7 @@ Slint is a Slackware derivitive, so SlackBuild was the repo source.
 ## Usage
 
 ````
-Usage:  [-h] [-v]
+Usage: install-nordvpn.sh [-h] [-v]
 
 Install Nordvpn on Slackware via SlackBuild
 
